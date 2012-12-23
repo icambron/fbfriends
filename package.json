@@ -1,0 +1,10 @@
+{
+  "name": "fbfriends",
+  "version": "0.0.1",
+  "author": "Isaac Cambron",
+  "devDependencies": {
+    "coffee-script": "*",
+    "uglify-js" : "*",
+    "less": "*"
+  }
+}
