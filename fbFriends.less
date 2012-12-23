@@ -1,0 +1,50 @@
+@fbBlue: #3B5998;
+@fbDark: #23487E;
+@betweenPerc: 10%;
+
+.fbFriends {
+   box-sizing: border-box;
+}
+
+.fbFriends-friend {
+  padding: 10px;
+  border-bottom: 1px solid gray;
+
+  img {
+    margin-right: 10px;
+  }
+
+  .fbFriends-name {
+    font-weight: bold;
+    color: @fbBlue;
+  }
+
+  input[type=checkbox] {
+    margin-right: 15px;
+  }
+}
+
+.fbFriends-friend:hover {
+  cursor: pointer;
+  background-color: @fbBlue;
+
+  .fbFriends-name {
+    color: white;
+  }
+}
+
+.fbFriends-spinner {
+  background-image: url(/ajax-loader.gif);
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%; 
+  height: 16px;
+}
+
+.fbFriends-header {
+  height: 35px;
+  .fbFriends-search {
+    display: inline-block;
+    float: right;
+  }
+}
