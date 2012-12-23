@@ -1,9 +1,9 @@
-[FbFriends](http://icambron.github.com/fbfriends)
+FbFriends
 =================================================
 
 FbFriends is a jQuery plugin for picking Facebook friends from a dialog.
 Check out the [demos and
-documentation](http://icambron.github.com/fbfriends)
+documentation](http://icambron.github.com/fbfriends).
 
 
 ### Building/Contributing
