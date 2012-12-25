@@ -1,0 +1,14 @@
+/*styles for Bootstrap Modal*/
+.modal {
+  border-radius: 0px !important;
+}
+
+.modal-body {
+  height: 102%;
+  overflow-y: scroll !important;
+}
+
+.modal-header {
+  color: white;
+  background-color: #3B5998;
+}

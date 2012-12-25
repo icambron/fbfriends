@@ -1,0 +1,38 @@
+.fbFriends {
+  box-sizing: border-box;
+}
+.fbFriends-friend {
+  padding: 10px;
+  border-bottom: 1px solid gray;
+}
+.fbFriends-friend img {
+  margin-right: 10px;
+}
+.fbFriends-friend .fbFriends-name {
+  font-weight: bold;
+  color: #3b5998;
+}
+.fbFriends-friend input[type=checkbox] {
+  margin-right: 15px;
+}
+.fbFriends-friend:hover {
+  cursor: pointer;
+  background-color: #3b5998;
+}
+.fbFriends-friend:hover .fbFriends-name {
+  color: white;
+}
+.fbFriends-spinner {
+  background-image: url(ajax-loader.gif);
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 16px;
+}
+.fbFriends-header {
+  height: 35px;
+}
+.fbFriends-header .fbFriends-search {
+  display: inline-block;
+  float: right;
+}
