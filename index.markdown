@@ -28,7 +28,7 @@ IOW:
 <script type='text/javascript' src='http://connect.facebook.net/en_US/all.js'></script>
 
 <script type='text/javascript' src='files/fbfriends.js'></script>
-<link rel='stylesheet' type='text/css' href='files/fbfriends.css'/>
+<link rel='stylesheet' type='text/css' href='files/fbFriends.css'/>
 
 <!-- or similar -->
 <script type='text/javascript' src='js/bootstrap.min.js'></script>
