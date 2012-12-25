@@ -23,7 +23,7 @@
   color: white;
 }
 .fbFriends-spinner {
-  background-image: url(/ajax-loader.gif);
+  background-image: url(ajax-loader.gif);
   background-position: center;
   background-repeat: no-repeat;
   width: 100%;

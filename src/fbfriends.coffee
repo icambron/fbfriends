@@ -9,7 +9,7 @@ do (jQuery) ->
     multiple: false
 
     #FbFriend will call this function when the user finishes selecting their friend(s). Takes an array of friends.
-    whenDone: null
+    whenDone: (friends) -> console.log friends
 
     #if you multiselect, FbFriend will call this function when a friend is checked. Takes a friend object.
     friendChecked: null
@@ -17,14 +17,14 @@ do (jQuery) ->
     #if you multiselect, FbFriend will call this function when a friend is unchecked. Takes a friend object.
     friendUnchecked: null
 
-    shower: (element) => throw 'You need to supply your own dialog'
-    hider: (element) => throw 'You need to supply your own dialog'
+    shower: (element) ->
+    hider: (element) ->
 
     #open the dialog right away
-    immediate: false
+    immediate: true
 
     #let FbFriends handle the API initialization for you.
-    initialize: true,
+    initialize: false,
 
     #let FbFriends show a login dialog if necessary. If false, FBFriends will assume the user is logged in.
     login: true
@@ -120,12 +120,12 @@ do (jQuery) ->
 
             FB.api "/me/friends?fields=#{fields.join ','}", processResponse
 
-    cancel: -> @options.hider()
+    cancel: -> @options.hider(@element)
 
     submit: ->
       if @options.multiple
         @options.whenDone (val for key, val of @selected)
-        @options.hider()
+        @options.hider(@element)
 
     handleClick: (item) ->
       $item = $ item
@@ -145,7 +145,7 @@ do (jQuery) ->
           @options.friendChecked data if @options.friendChecked
       else
         @options.whenDone [data]
-        @options.hider()
+        @options.hider(@element)
 
     initialize: (after) ->
       if @options.initialize && !@initialized
@@ -164,7 +164,7 @@ do (jQuery) ->
       else after()
 
     login: (after) ->
-      if @options.login && !@loggedIn
+      if (@options.login || @options.initialize) && !@loggedIn
         FB.login (response) =>
           if response.authResponse && response.status == 'connected'
             @loggedIn = true
@@ -173,11 +173,11 @@ do (jQuery) ->
             err = "User didn't log in."
             @afterLogin err if @afterLogin
             after err
-      else 
+      else
         @loggedIn = true
         after()
 
-    logout: -> 
+    logout: ->
       if @loggedIn
         @loggedIn = false
         FB.logout()
@@ -190,6 +190,7 @@ do (jQuery) ->
       unless fbFriends
         options = if typeof(input) == 'object' then $.extend(true, {}, defaults, input) else defaults
         fbFriends = new FbFriends($this, options)
-        fbFriends.show() if options.immediate
       if typeof input == 'string'
         fbFriends[input]()
+      else
+        fbFriends.show() if fbFriends.options.immediate

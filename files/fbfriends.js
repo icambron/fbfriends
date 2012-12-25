@@ -2,23 +2,20 @@
 (function() {
 
   (function(jQuery) {
-    var $, FbFriends, defaults, fields,
-      _this = this;
+    var $, FbFriends, defaults, fields;
     $ = jQuery;
     fields = ['name', 'id', 'picture', 'first_name', 'last_name'];
     defaults = {
       multiple: false,
-      whenDone: null,
+      whenDone: function(friends) {
+        return console.log(friends);
+      },
       friendChecked: null,
       friendUnchecked: null,
-      shower: function(element) {
-        throw 'You need to supply your own dialog';
-      },
-      hider: function(element) {
-        throw 'You need to supply your own dialog';
-      },
-      immediate: false,
-      initialize: true,
+      shower: function(element) {},
+      hider: function(element) {},
+      immediate: true,
+      initialize: false,
       login: true,
       fb: {
         appId: null,
@@ -98,7 +95,7 @@
       };
 
       FbFriends.prototype.cancel = function() {
-        return this.options.hider();
+        return this.options.hider(this.element);
       };
 
       FbFriends.prototype.submit = function() {
@@ -114,7 +111,7 @@
             }
             return _results;
           }).call(this));
-          return this.options.hider();
+          return this.options.hider(this.element);
         }
       };
 
@@ -142,7 +139,7 @@
           }
         } else {
           this.options.whenDone([data]);
-          return this.options.hider();
+          return this.options.hider(this.element);
         }
       };
 
@@ -173,7 +170,7 @@
 
       FbFriends.prototype.login = function(after) {
         var _this = this;
-        if (this.options.login && !this.loggedIn) {
+        if ((this.options.login || this.options.initialize) && !this.loggedIn) {
           return FB.login(function(response) {
             var err;
             if (response.authResponse && response.status === 'connected') {
@@ -211,12 +208,13 @@
         if (!fbFriends) {
           options = typeof input === 'object' ? $.extend(true, {}, defaults, input) : defaults;
           fbFriends = new FbFriends($this, options);
-          if (options.immediate) {
-            fbFriends.show();
-          }
         }
         if (typeof input === 'string') {
           return fbFriends[input]();
+        } else {
+          if (fbFriends.options.immediate) {
+            return fbFriends.show();
+          }
         }
       });
     };
