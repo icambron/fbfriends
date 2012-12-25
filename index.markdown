@@ -16,8 +16,8 @@ FbFriends is a jQuery plugin for picking Facebook friends from a dialog.
 
  * [jQuery](http://jquery.com)
  * A reference to the [FB SDK JS](http://connect.facebook.net/en_US/all.js)
- * The FbFrinds [JS file](/files/fbfriends.js) and modifiable [CSS file](/files/fbfriends.css) 
- * The CSS references a [loading animation](/css/ajax-loader.gif) which you may or may not want
+ * The FbFrinds [JS file](files/fbfriends.js) and modifiable [CSS file](files/fbfriends.css) 
+ * The CSS references a [loading animation](css/ajax-loader.gif) which you may or may not want
  * Some kind of JS library for providing a dialog, such as [Bootstrap](http://twitter.github.com/bootstrap/) or
    [jQuery UI](jqueryui.com)
 
