@@ -118,6 +118,10 @@
       FbFriends.prototype.handleClick = function(item) {
         var $item, data;
         $item = $(item);
+        window.lastItem = $(item);
+        if (!$item.hasClass('fbFriends-friend')) {
+          $item = $item.parents('.fbFriends-friend');
+        }
         data = {
           id: $item.data('id'),
           name: $item.data('name'),

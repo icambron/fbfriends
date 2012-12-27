@@ -125,10 +125,11 @@ do (jQuery) ->
     submit: ->
       if @options.multiple
         @options.whenDone (val for key, val of @selected)
-        @options.hider(@element)
+        @options.hider @element
 
     handleClick: (item) ->
-      $item = $ item
+      $item = $(item)
+      $item = $item.parents('.fbFriends-friend') unless $item.hasClass 'fbFriends-friend'
       data =
         id: $item.data 'id'
         name: $item.data 'name'
