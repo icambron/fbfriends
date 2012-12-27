@@ -24,7 +24,8 @@
         cookie: true,
         xfbml: false
       },
-      afterLogin: null
+      afterLogin: null,
+      additionalFields: []
     };
     FbFriends = (function() {
 
@@ -80,7 +81,7 @@
                     }
                     $('<img>').attr('src', friend.picture.data.url).appendTo(friendDiv);
                     $('<span>').addClass('fbFriends-name').text(friend.name).appendTo(friendDiv);
-                    friendDiv.data('id', friend.id).data('name', friend.name).data('picture', friend.picture.data.url).attr('data-first-name', friend.first_name.toLowerCase()).attr('data-last-name', friend.last_name.toLowerCase());
+                    friendDiv.data('fb-info', friend).attr('data-first-name', friend.first_name.toLowerCase()).attr('data-last-name', friend.last_name.toLowerCase());
                     return _this.element.append(friendDiv);
                   });
                   if (response.paging && response.paging.next) {
@@ -88,7 +89,7 @@
                   }
                 }
               };
-              return FB.api("/me/friends?fields=" + (fields.join(',')), processResponse);
+              return FB.api("/me/friends?fields=" + (fields.concat(_this.options.additionalFields).join(',')), processResponse);
             }
           });
         });
@@ -118,15 +119,10 @@
       FbFriends.prototype.handleClick = function(item) {
         var $item, data;
         $item = $(item);
-        window.lastItem = $(item);
         if (!$item.hasClass('fbFriends-friend')) {
           $item = $item.parents('.fbFriends-friend');
         }
-        data = {
-          id: $item.data('id'),
-          name: $item.data('name'),
-          picture: $item.data('picture')
-        };
+        data = $item.data('fb-info');
         if (this.options.multiple) {
           if (this.selected[data.id]) {
             delete this.selected[data.id];

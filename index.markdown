@@ -72,6 +72,44 @@ the `whenDone` callback set to show cool toaster things:
 
 That's it! (Although I have styled the modal a [bit](/css/demo.css).)
 
+### Friends objects
+
+The whenDone callback takes an array of friend objects, which are passed
+directly back from the FB API. They might looks something like this:
+
+
+{% highlight js %}
+[
+  {
+    first_name: "Bob",
+    last_name: "Dole",
+    id: "11111",
+    name: "Bob Dole",
+    picture: {
+      data: {
+        is_silhouette: false,
+        url: "http://someImageUrl"
+      }
+    }
+  }
+]
+{% endhighlight %}
+
+Those are the fields that come back by default. If you want more info
+about the friend(s), you can specify a list of fields in the
+`additionalFields` option, like so:
+
+{% highlight js %}
+$("#something").fbFriends({
+  additionalFields: ["gender"],
+  afterDone: function(friends){ console.log(friends[0].gender);}
+});
+{% endhighlight %}
+
+
+You should first try the fields out in the [FB API Graph
+Explorer](https://developers.facebook.com/tools/explorer/?method=GET&path=me%2Ffriends%3Ffields%3Dname%2Cid%2Cpicture%2Cfirst_name%2Clast_name) to see how if how it works (e.g. do you need to configure your app to ask for more permissions?).
+
 ##Bring Your Own Dialog (BYOD)
 
 FbFriends doesn't contain any functionality for creating a dialog. You
@@ -217,7 +255,8 @@ $("#yourDiv").fbDialog({
     cookie: true,
     xfbml: false
   },
-  afterLogin: null                //callback with the users info if login: true
+  afterLogin: null,                //callback with the users info if login: true
+  additionalFields: []
 }
 {% endhighlight %}
 

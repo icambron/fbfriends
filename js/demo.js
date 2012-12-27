@@ -1,6 +1,7 @@
 var appId = "184193755060711";
 
 var toast = function(friends){
+  console.log(friends);
   toastr.info("Selected: " + friends.map(function(friend){ return friend.name}).join(', '));
 };
 
