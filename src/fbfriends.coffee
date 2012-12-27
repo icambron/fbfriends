@@ -40,6 +40,9 @@ do (jQuery) ->
     #function to call if FbFriends logs in for you. Takes (err, authResponse)
     afterLogin: null
 
+    #extra fields to ask FB for
+    additionalFields: []
+
   class FbFriends
     constructor: (element, @options) ->
       @element = $ element
@@ -107,9 +110,7 @@ do (jQuery) ->
                   $('<span>').addClass('fbFriends-name').text(friend.name).appendTo friendDiv
 
                   friendDiv
-                    .data('id', friend.id)
-                    .data('name', friend.name)
-                    .data('picture', friend.picture.data.url)
+                    .data('fb-info', friend)
                     .attr('data-first-name', friend.first_name.toLowerCase())
                     .attr('data-last-name', friend.last_name.toLowerCase())
 
@@ -118,7 +119,7 @@ do (jQuery) ->
                 if response.paging && response.paging.next
                   FB.api response.paging.next, processResponse
 
-            FB.api "/me/friends?fields=#{fields.join ','}", processResponse
+            FB.api "/me/friends?fields=#{fields.concat(@options.additionalFields).join ','}", processResponse
 
     cancel: -> @options.hider(@element)
 
@@ -130,10 +131,7 @@ do (jQuery) ->
     handleClick: (item) ->
       $item = $(item)
       $item = $item.parents('.fbFriends-friend') unless $item.hasClass 'fbFriends-friend'
-      data =
-        id: $item.data 'id'
-        name: $item.data 'name'
-        picture: $item.data 'picture'
+      data = $item.data 'fb-info'
 
       if @options.multiple
         if @selected[data.id]
