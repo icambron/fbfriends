@@ -159,7 +159,7 @@ $("#multi").fbFriends({
 });
 {% endhighlight %}
 
-We add a couple of buttons to our modal so taht the user can tell us
+We add a couple of buttons to our modal so that the user can tell us
 when they're done:
 
 {% highlight html %}
@@ -186,7 +186,7 @@ Do it:
 
 By default, FbFriends will open the dialog as soon as it's called. You
 can override that by passing `immediate: false` in the options. You can
-later open the dialog with
+later open the dialog with:
 
 {% highlight js %}
 $(yourSelector).fbFriends("show");
@@ -205,7 +205,7 @@ Javascript SDK and logged in the user. But if you don't need to use the
 FB SDK outside of showing FbFriends, you can have FbFriends do all the
 work for you. You'll need to pass it at least an FB appID:
 
-{% highlight html %}
+{% highlight js %}
 $("#yourDiv").fbDialog({
   //other options here
   initialize: true,
@@ -234,7 +234,7 @@ you need to capture the name and FB ID of the user.
 
 Here's the full set of options with defaults:
 
-{% highlight html %}
+{% highlight js %}
 $("#yourDiv").fbDialog({
 {
   multiple: false,                //select mutliple friends
@@ -257,7 +257,7 @@ $("#yourDiv").fbDialog({
   },
   afterLogin: null,                //callback with the users info if login: true
   additionalFields: []
-}
+});
 {% endhighlight %}
 
 <div class="modal hide" role="dialog">
