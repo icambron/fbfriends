@@ -7,8 +7,6 @@ var toast = function(friends){
 
 $(function(){
 
-  FB.UIServer.setLoadedNode = function(a,b){FB.UIServer._loadedNodes[a.id] = b;};
-
   FB.init({
     appId: appId,
     status: true
