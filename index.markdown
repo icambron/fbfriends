@@ -123,7 +123,7 @@ For example, you could also easy [jQuery UI](http://jqueryui.com/) with a defaul
 
 {% highlight html %}
 <div title="Select a friend">
-  <div id="jqueryui"/>
+  <div id="jqueryui"></div>
 </div>
 {% endhighlight %}
 
