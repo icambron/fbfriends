@@ -285,5 +285,5 @@ $("#yourDiv").fbDialog({
 </div>
 
 <div title="Select a friend">
-  <div id="jqueryui"/>
+  <div id="jqueryui"></div>
 </div>
