@@ -256,7 +256,8 @@ $("#yourDiv").fbDialog({
     xfbml: false
   },
   afterLogin: null,                //callback with the users info if login: true
-  additionalFields: []
+  additionalFields: [],
+  includeMe: false                 //add the current user to the list
 });
 {% endhighlight %}
 
