@@ -7,6 +7,9 @@ documentation](http://icambron.github.com/fbfriends).
 
 ### Changelog
 
+* 2012/1/14 - Added an `includeMe` option that adds the current user to
+  the list so they can pick themselves.
+
 * 2012/12/26 - Added `additionalFields` option. **Breaking change**: the callbacks are now passed the object returned by FB as-is, which is a bit different than what FbFriends was passing before. Specifically, if you were using `friend.picture`, you need `friend.picture.data.url` now.
 
 ### Building/Contributing
