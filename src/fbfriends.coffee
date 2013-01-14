@@ -1,6 +1,4 @@
-do (jQuery) ->
-  $ = jQuery
-
+do ($ = jQuery) ->
   fields = ['name', 'id', 'picture', 'first_name', 'last_name']
 
   defaults =
@@ -43,6 +41,8 @@ do (jQuery) ->
     #extra fields to ask FB for
     additionalFields: []
 
+    includeMe: false
+
   class FbFriends
     constructor: (element, @options) ->
       @element = $ element
@@ -78,7 +78,8 @@ do (jQuery) ->
                 matched.show()
                 friends.not(matched).hide()
             )
-            .appendTo header
+            .appendTo(header)
+            .focus()
 
           ajaxLoader = $('<div>')
             .addClass('fbFriends-spinner')
@@ -90,6 +91,21 @@ do (jQuery) ->
               .text("There's been an error processing your login. Please make sure you're logged into Facebook and try again.")
               .appendTo @element
           else
+            addFriend = (friend) =>
+              friendDiv = $('<div>').addClass('fbFriends-friend')
+
+              $('<input>').attr('type', 'checkbox').appendTo(friendDiv) if @options.multiple
+              if friend.picture && friend.picture.data
+                $('<img>').attr('src', friend.picture.data.url).appendTo friendDiv
+              $('<span>').addClass('fbFriends-name').text(friend.name).appendTo friendDiv
+
+              friendDiv
+                .data('fb-info', friend)
+                .attr('data-first-name', friend.first_name.toLowerCase())
+                .attr('data-last-name', friend.last_name.toLowerCase())
+
+              @element.append friendDiv
+
             processResponse = (response) =>
               ajaxLoader.hide()
 
@@ -102,24 +118,15 @@ do (jQuery) ->
                 @element.toggleClass 'single', @options.single
                 @element.toggleClass 'multiple', !@options.single
 
-                response.data.forEach (friend) =>
-                  friendDiv = $('<div>').addClass('fbFriends-friend')
-
-                  $('<input>').attr('type', 'checkbox').appendTo(friendDiv) if @options.multiple
-                  $('<img>').attr('src', friend.picture.data.url).appendTo friendDiv
-                  $('<span>').addClass('fbFriends-name').text(friend.name).appendTo friendDiv
-
-                  friendDiv
-                    .data('fb-info', friend)
-                    .attr('data-first-name', friend.first_name.toLowerCase())
-                    .attr('data-last-name', friend.last_name.toLowerCase())
-
-                  @element.append friendDiv
+                addFriend friend for friend in response.data
 
                 if response.paging && response.paging.next
                   FB.api response.paging.next, processResponse
 
             FB.api "/me/friends?fields=#{fields.concat(@options.additionalFields).join ','}", processResponse
+
+            if @options.includeMe
+              FB.api "/me?fields=#{fields.concat(@options.additionalFields).join ','}", addFriend
 
     cancel: -> @options.hider(@element)
 
