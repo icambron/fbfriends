@@ -1,4 +1,11 @@
+PATH := node_modules/.bin:$(PATH)
+SHELL := /bin/bash
+
+configure:
+	@npm install
+
 build:
-	@node_modules/coffee-script/bin/coffee -c -o files src/fbfriends.coffee
-	@node_modules/uglify-js/bin/uglifyjs files/fbfriends.js > files/fbfriends.min.js
-	@node_modules/less/bin/lessc src/fbfriends.less > files/fbfriends.css
+	@mkdir -p dist
+	@coffee -c -o dist src/fbfriends.coffee
+	@uglifyjs -o dist/fbfriends.min.js dist/fbfriends.js
+	@lessc src/fbfriends.less > dist/fbfriends.css

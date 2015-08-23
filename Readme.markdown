@@ -2,24 +2,16 @@ FbFriends
 =================================================
 
 FbFriends is a jQuery plugin for picking Facebook friends from a dialog.
-Check out the [demos and
-documentation](http://icambron.github.com/fbfriends).
-
-### Changelog
-
-* 2013/1/14 - Added an `includeMe` option that adds the current user to
-  the list so they can pick themselves.
-
-* 2012/12/26 - Added `additionalFields` option. **Breaking change**: the callbacks are now passed the object returned by FB as-is, which is a bit different than what FbFriends was passing before. Specifically, if you were using `friend.picture`, you need `friend.picture.data.url` now.
+Check out the [demos and documentation](http://icambron.github.com/fbfriends).
 
 ### Building/Contributing
 
-FbFriends is written in [CoffeeScript](http://coffeescript.org/) and [Less](http://lesscss.org/). You can find the source files in `/src`; the output directory is `/files`.
+FbFriends is written in [CoffeeScript](http://coffeescript.org/) and [Less](http://lesscss.org/). You can find the source files in `/src`; the output directory is `/dist`.
 
 To get started, fork the repository, clone it, and run:
 
 ```
-npm install
+make configure
 ```
 
 To build just run

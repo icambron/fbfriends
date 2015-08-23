@@ -2,9 +2,14 @@
   "name": "fbfriends",
   "version": "0.0.1",
   "author": "Isaac Cambron",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/icambron/fbfriends.git"
+  },
   "devDependencies": {
     "coffee-script": "*",
     "uglify-js" : "*",
     "less": "*"
-  }
+  },
+  "license": "MIT"
 }
